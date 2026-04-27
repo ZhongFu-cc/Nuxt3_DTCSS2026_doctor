@@ -7,10 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-    
+    steps:   
       - name: Node.js setup
         uses: actions/setup-node@v4
         with:
@@ -23,7 +20,7 @@ jobs:
           npm run build
         env:
           NUXT_PUBLIC_DOMAIN: ${{ secrets.NUXT_PUBLIC_DOMAIN }}
-          NUXT_PUBLIC_MINIO_BASE: ${{ secrets.NUXT_PUBLIC_MINIO_BASE }}
+          NUXT_PUBLIC_MINIO: ${{ secrets.NUXT_PUBLIC_MINIO_BASE }}
           NUXT_PUBLIC_API_BASE: ${{ secrets.NUXT_PUBLIC_API_BASE }}
 
       - name: Stop pm2
