@@ -67,7 +67,7 @@ const menu = reactive([
     { title: t('transportation'), path: '/transportation', isActive: false, isShow: true },
     { title: t('travel'), path: '/travel', isActive: false, isShow: true },
     { title: t('sponsorList'), path: '/sponsor-list', isActive: false, isShow: true },
-    { title: t('mascotArea'), path: '/mascot', isActive: false, isShow: true },
+    { title: t('mascot'), path: '/mascot', isActive: false, isShow: true },
     {
         title: 'Gallery', path: '/gallery', isActive: false, isShow: true, submenu: [
             { title: '2023 Gallery', path: '/gallery/2023' },
@@ -189,24 +189,24 @@ const logout = async () => {
                 list-style: none;
             }
 
-            // overflow: hidden;
-            // max-height: 0px;
-            // transition: 0.5s;
-            // font-size: 16px;
+            overflow: hidden;
+            max-height: 0px;
+            transition: 0.5s;
+            font-size: 16px;
 
-            // a {
-            //     font-size: 1.2rem;
-            //     font-weight: bold;
-            //     display: block;
-            //     color: $main-content-color;
-            //     padding: 0.5rem 0;
-            // }
+            a {
+                font-size: 1.2rem;
+                font-weight: bold;
+                display: block;
+                color: $main-content-color;
+                padding: 0.5rem 0;
+            }
 
             &.is-open {
-                // overflow: auto !important;
-                // max-height: none !important;
-                // margin-left: 15vw;
-                // font-size: 16px;
+                overflow: auto !important;
+                max-height: none !important;
+                margin-left: 5vw;
+                font-size: 16px;
             }
         }
     }
