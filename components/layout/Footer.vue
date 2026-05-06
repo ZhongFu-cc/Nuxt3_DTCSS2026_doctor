@@ -1,8 +1,9 @@
 <template>
     <footer class="footer-section">
         <div class="footer-box">
-            <p>中華民國乳癌教育暨防治學會</p>
-            <p>聯絡我們: twbc.prevention@gmail.com</p>
+            <p>大林慈濟醫院 心臟血管外科</p>
+            <p>院址：622 嘉義縣大林鎮民生路二號</p>
+            <p>電話：05-264-8000</p>
         </div>
     </footer>
 </template>
@@ -12,7 +13,6 @@ import Title from './Title.vue';
 <style lang="scss" scoped>
 .footer-section {
     background: linear-gradient(to right, #ee9ab9 0%, #383587 70%);
-    // background: url('../../assets/img/ticbcs_footer.jpg') no-repeat top center;
     background-size: cover;
     padding: 2rem 0;
 

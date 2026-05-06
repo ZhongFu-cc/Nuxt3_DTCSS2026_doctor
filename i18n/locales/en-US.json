@@ -1,7 +1,7 @@
 {
   "home": "Home",
   "aboutUs": "About Us",
-  "conferenceInformation": "TICBCS 2026",
+  "conferenceInformation": "DTCSS 2026",
   "registration": "Registration",
   "registrationFee": "Registration Fee",
   "onlineRegistration": "Online Registration",
@@ -139,10 +139,19 @@
   "travel": "Travel",
   "mascot": "Mascot",
   "viewMore": "View more",
-  "registrationInfo1": "On-site registration: $300",
-  "registrationInfo2": "Your registration information will be retained for use in future annual conferences.",
+  "registrationInfo1": "Each email address can only be used for one registration. Please ensure you provide the participant's own email address, as all course information will be sent via email.",
+  "registrationInfo2": "Vegetarian lunch is provided for this event.",
   "logoutConfirmation": "Are you sure you want to log out?",
   "logoutTitle": "Confirm Logout",
   "confirm": "Confirm",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "hospital": "Hospital",
+  "selectCountry": "Select Country",
+  "registrationReminder": "Notice",
+  "eventDate": "Event Day: 08/22 (Sat.)",
+  "eventTime": "Time: 08/22 (Sat.) 08:30-17:00 ",
+  "eventLocation": "Location : 大林慈濟醫院 大愛樓 5F大講堂 (嘉義縣大林鎮民生路2號)\t",
+  "personalDataNotice": "ersonal Data Collection, Processing, and Use Notification and Consent Form  To facilitate registration and subsequent communication for this event, the organizer will collect the personal information provided by you in this form (including but not limited to name, contact information, email address, etc.).",
+  "personalDataUsage": "Your personal data will be used exclusively for event registration confirmation, notifications, information provision, and subsequent correspondence. All data will be protected in accordance with the Personal Data Protection Act and relevant regulations.  Unless otherwise agreed upon by you or required by law, your personal data will not be disclosed to any third parties or used for any other purposes.",
+  "personalDataRights": "You have the right to review, correct, request the deletion of, or demand the cessation of the use of your personal data. Please be advised that declining to provide your personal information may impact your eligibility for registration and the receipt of relevant notifications. Please read the above instructions carefully and confirm your consent before submitting this form."
 }

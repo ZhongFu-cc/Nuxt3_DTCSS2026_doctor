@@ -1,10 +1,10 @@
 <template>
     <ClientOnly>
         <section class="top-section">
-            <div class="menu-container" :class="[{ 'scrolled-menu-section': isScroll }, { 'is-active': isActive }]">
+            <div class="menu-container" :class="[{ 'is-active': isActive }]">
 
                 <!-- 漢堡選單 -->
-                <div class="mobile-menu-box">
+                <!-- <div class="mobile-menu-box">
                     <div class="hamburger-icon">
                         <div class="container">
                             <div class="hamburger" :class="{ 'is-active': isActive }" id="hamburger-1"
@@ -22,103 +22,27 @@
                             <img v-if="isScroll" src="@/assets/img/user2.svg" alt="">
                         </nuxt-link>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Logo 區塊 -->
                 <div class="logo-container" v-if="!isActive">
                     <nuxt-link class="logo-link" :to="localPath('/')" @click="pcModeActiveItemState.setActiveItem('')">
                         <div class="logo-image-box">
-                            <img class="logo" src="/img/logo.png" alt="TICBCS Logo" />
+                            <img class="logo" src="/img/logo.png" alt="DTCSS Logo" />
                         </div>
                     </nuxt-link>
                 </div>
 
-                <!-- 主選單區塊 -->
-                <div class="primary-menu-box menu-box">
-                    <nuxt-link v-for="menu in primaryMenuItems" :key="menu.activeKey" class="menu-item"
-                        :to="localPath(menu.route)" @click="pcModeActiveItemState.setActiveItem(menu.activeKey)"
-                        :class="pcModeActiveItemState.validActive(menu.activeKey)">{{ menu.name
-                        }}</nuxt-link>
 
-                    <div class="secondary-menu-box menu-box">
-                        <nuxt-link v-for="menu in secondaryMenuItems" :key="menu.activeKey" class="menu-item"
-                            :to="localPath(menu.route)" @click="pcModeActiveItemState.setActiveItem(menu.activeKey)"
-                            :class="pcModeActiveItemState.validActive(menu.activeKey)">{{
-                                menu.name }}</nuxt-link>
+                <div class="menu-box">
+                    <img class="translation-icon" src="@/assets/img/translation1.svg" alt="earth icon"
+                        @click="translationMenuState.toggleMenu" />
+                    <!-- <img v-if="!isScroll" class="translation-icon" src="@/assets/img/translation2.svg" alt="earth icon"
+                        @click="translationMenuState.toggleMenu" /> -->
 
-                        <div class="gallery-menu-box menu-box" @click="galleryMenuState.toggleMenu">
-                            <div class="menu-title" :class="pcModeActiveItemState.validActive('gallery')">
-                                Gallery
-                                <el-icon>
-                                    <ElIconArrowDown />
-                                </el-icon>
-                            </div>
-                            <div class="sub-menu-box" v-if="galleryMenuState.isOpen">
-                                <nuxt-link v-for="subMenu in galleryMenuItem.subMenu" :key="subMenu.activeKey"
-                                    class="sub-menu-item" :to="localPath(subMenu.route)"
-                                    @click.stop="pcModeActiveItemState.setActiveItem('gallery')"
-                                    :class="pcModeActiveItemState.validActive(subMenu.activeKey)">{{ subMenu.name
-                                    }}</nuxt-link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 次選單區塊 -->
-                    <div class="hidden-menu-box menu-box">
-                        <div class="menu-title" :class="pcModeActiveItemState.validActive('secondary')"
-                            @click="secondaryMenuState.toggleMenu">{{ t('viewMore') }}<el-icon>
-                                <ElIconArrowDown />
-                            </el-icon></div>
-                        <div class="sub-menu-box" v-if="secondaryMenuState.isOpen">
-                            <nuxt-link v-for="menu in secondaryMenuItems" :key="menu.activeKey" class="sub-menu-item"
-                                :to="localPath(menu.route)" @click="pcModeActiveItemState.setActiveItem(menu.activeKey)"
-                                :class="pcModeActiveItemState.validActive(menu.activeKey)">{{ menu.name }}</nuxt-link>
-
-                            <div class="gallery-menu-box menu-box" @click="galleryMenuState.toggleMenu">
-                                <div class="menu-title" :class="pcModeActiveItemState.validActive('gallery')">
-                                    Gallery
-                                    <el-icon>
-                                        <ElIconArrowDown />
-                                    </el-icon>
-                                </div>
-                                <div class="sub-menu-box" v-if="galleryMenuState.isOpen">
-                                    <nuxt-link v-for="subMenu in galleryMenuItem.subMenu" :key="subMenu.activeKey"
-                                        class="sub-menu-item" :to="localPath(subMenu.route)"
-                                        @click="pcModeActiveItemState.setActiveItem('gallery')"
-                                        :class="pcModeActiveItemState.validActive(subMenu.activeKey)">{{ subMenu.name
-                                        }}</nuxt-link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 會員選單區塊 -->
-                    <div class="member-menu-box menu-box">
-                        <div v-if="isLogin" class="menu-title" :class="pcModeActiveItemState.validActive('member')"
-                            @click="memberMenuState.toggleMenu">{{ t('member') }}<el-icon>
-                                <ElIconArrowDown />
-                            </el-icon></div>
-
-                        <div class="sub-menu-box" v-if="memberMenuState.isOpen">
-                            <nuxt-link class="sub-menu-item" :to="localPath('/member-center')"
-                                @click="pcModeActiveItemState.setActiveItem('member')">{{ t('memberCenter')
-                                }}</nuxt-link>
-                            <nuxt-link class="sub-menu-item" @click="handleLogout">{{ t('logout') }}</nuxt-link>
-                        </div>
-                        <nuxt-link class="menu-item" v-if="!isLogin" :to="localPath('/login')"
-                            @click="pcModeActiveItemState.setActiveItem('member')">{{ t('login') }}</nuxt-link>
-                    </div>
-
-                    <div class="menu-box">
-                        <img v-if="isScroll" class="translation-icon" src="@/assets/img/translation1.svg"
-                            alt="earth icon" @click="translationMenuState.toggleMenu" />
-                        <img v-if="!isScroll" class="translation-icon" src="@/assets/img/translation2.svg"
-                            alt="earth icon" @click="translationMenuState.toggleMenu" />
-
-                        <div class="sub-menu-box last-sub-menu-box" v-if="translationMenuState.isOpen">
-                            <el-button @click="setLang('zh')">繁體中文</el-button>
-                            <el-button @click="setLang('en')">English</el-button>
-                        </div>
+                    <div class="sub-menu-box last-sub-menu-box" v-if="translationMenuState.isOpen">
+                        <el-button @click="setLang('zh')">繁體中文</el-button>
+                        <el-button @click="setLang('en')">English</el-button>
                     </div>
                 </div>
             </div>
@@ -153,26 +77,26 @@ function handleScroll() {
 
 // 菜單基礎項目
 const primaryMenuItems = computed(() => [
-    { name: t('aboutUs'), route: '/about-us', activeKey: 'aboutUs' },
-    { name: t('conferenceInformation'), route: '/conference-information', activeKey: 'conferenceInformation' },
-    { name: t('seminarRegistration'), route: '/seminar-registration', activeKey: 'seminarRegistration' },
+    // { name: t('aboutUs'), route: '/about-us', activeKey: 'aboutUs' },
+    // { name: t('conferenceInformation'), route: '/conference-information', activeKey: 'conferenceInformation' },
+    // { name: t('seminarRegistration'), route: '/seminar-registration', activeKey: 'seminarRegistration' },
 ])
 
 // 次級菜單項目 (在螢幕寬度不足以顯示所有 primary menu 項目時會顯示在 sub-menu 中)
 const secondaryMenuItems = computed(() => [
-    { name: t('transportation'), route: '/transportation', activeKey: 'transportation' },
-    { name: t('travel'), route: '/travel', activeKey: 'travel' },
-    { name: t('sponsorList'), route: '/sponsor-list', activeKey: 'sponsorList' },
-    { name: t('mascot'), route: '/mascot', activeKey: 'mascot' },
+    // { name: t('transportation'), route: '/transportation', activeKey: 'transportation' },
+    // { name: t('travel'), route: '/travel', activeKey: 'travel' },
+    // { name: t('sponsorList'), route: '/sponsor-list', activeKey: 'sponsorList' },
+    // { name: t('mascot'), route: '/mascot', activeKey: 'mascot' },
 ])
 
 // Gallery 菜單項目
 const galleryMenuItem = {
-    name: 'Gallery', route: '', activeKey: 'gallery', subMenu: [
-        { name: 'Gallery 2023', route: '/gallery/2023', activeKey: 'gallery2023' },
-        { name: 'Gallery 2024', route: '/gallery/2024', activeKey: 'gallery2024' },
-        { name: 'Gallery 2025', route: '/gallery/2025', activeKey: 'gallery2025' },
-    ]
+    // name: 'Gallery', route: '', activeKey: 'gallery', subMenu: [
+    //     { name: 'Gallery 2023', route: '/gallery/2023', activeKey: 'gallery2023' },
+    //     { name: 'Gallery 2024', route: '/gallery/2024', activeKey: 'gallery2024' },
+    //     { name: 'Gallery 2025', route: '/gallery/2025', activeKey: 'gallery2025' },
+    // ]
 }
 
 // 次級菜單狀態
@@ -289,36 +213,41 @@ onMounted(() => {
         position: fixed;
         text-align: center;
         align-items: center;
-        // justify-content: space-around;
+        justify-content: center;
         top: 0;
         z-index: 10;
         width: 100%;
         height: 6.5rem;
-        padding: 0.5rem 0;
+        padding: 0.5rem 0rem;
         border-bottom: 8px solid #915aa1;
+        background-color: #19254e;
 
 
         @media screen and (max-width: 1920px) {
             height: 4.5rem;
-            justify-content: space-around;
+            gap: 40rem;
+            // justify-content: space-around;
         }
 
-        @media screen and (max-width: 469px) {
-            justify-content: flex-start;
+        @media screen and (max-width: 940px) {
+            gap: 25rem;
+        }
+
+        @media screen and (max-width: 468px) {
+            gap: 5rem;
+            justify-content: space-around;
         }
 
         // Logo區域
         .logo-container {
-            width: 24%;
-
             .logo-link {
                 cursor: pointer;
-                display: flex;
+                // display: flex;
                 align-items: center;
                 justify-content: center;
 
                 .logo-image-box {
-                    width: 30%;
+                    width: 70%;
 
                     .logo {
                         width: 100%;
@@ -330,9 +259,10 @@ onMounted(() => {
                         width: 60%;
                     }
 
-                    @media screen and (max-width: 940px) {
-                        display: none;
+                    @media screen and (max-width: 768px) {
+                        width: 70%;
                     }
+
                 }
 
 
@@ -340,10 +270,6 @@ onMounted(() => {
                     font-size: 1.5rem;
                     color: #59413C;
                 }
-            }
-
-            @media screen and (max-width: 940px) {
-                display: none;
             }
         }
 
@@ -466,7 +392,7 @@ onMounted(() => {
             }
 
             @media screen and (max-width: 940px) {
-                display: none;
+                // display: none;
             }
         }
 

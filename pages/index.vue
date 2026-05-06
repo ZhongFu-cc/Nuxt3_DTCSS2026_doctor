@@ -1,76 +1,326 @@
 <template>
     <main class="common-section">
-        <Banner></Banner>
 
         <div class="main-section">
             <div class="content">
-                <div class="content-image-box">
-                    <img src="@/assets/img/bubble_tea_hello.png" alt="">
-                </div>
-                <div class="content-message-box">
-                    <p><b>Research and Real-World Issue of Breast Cancer</b></p>
-                    <p>立足台中、接軌國際、培育英才、任重道遠</p>
-                    <p>在乳癌診治持續邁向個人化與整合照護的今日，我們誠摯地邀清您蒞臨本次年會，與國內外專家共探乳癌診療的新趨勢</p>
-                    <p>本年會將涵蓋從基因檢測、輔助治療、到臨床決策支援與病人全人照護的最新實證，盼您共襄盛舉，攜手推動更完善的乳癌照護路徑。</p>
-                </div>
-            </div>
+                <div class="conference-info-box">
 
-            <div class="carousel-section">
-                <el-button class="left-btn" @click="prev"><el-icon>
-                        <ElIconArrowLeftBold />
-                    </el-icon></el-button>
-                <div class="carousel-box">
-                    <el-carousel ref="carousel" :interval="4000" type="card" arrow="never">
-                        <el-carousel-item>
-                            <img src="@/assets/img/carousel/img0.jpg" alt="">
-                        </el-carousel-item>
-                        <el-carousel-item>
-                            <img src="@/assets/img/carousel/img1.jpg" alt="">
-                        </el-carousel-item>
-                        <el-carousel-item>
-                            <img src="@/assets/img/carousel/img2.jpg" alt="">
-                        </el-carousel-item>
-                        <el-carousel-item>
-                            <img src="@/assets/img/carousel/img3.jpg" alt="">
-                        </el-carousel-item>
-                        <el-carousel-item>
-                            <img src="@/assets/img/carousel/img4.jpg" alt="">
-                        </el-carousel-item>
-                        <el-carousel-item>
-                            <img src="@/assets/img/carousel/img5.jpg" alt="">
-                        </el-carousel-item>
-                        <el-carousel-item>
-                            <img src="@/assets/img/carousel/img6.jpg" alt="">
-                        </el-carousel-item>
-                    </el-carousel>
+                    <!-- <el-button v-for="item in locales" :key="item" @click="setLocale(item.code)">{{ item.name
+                        }}</el-button> -->
+                    <h1 class="topic">「Good line Good life」</h1>
+                    <h1 class="topic">大林慈濟第十四屆血液透析瘻管治療與照護國際研討會</h1>
+                    <p>{{ t('eventDate') }}</p>
+                    <p>{{ t('eventTime') }}​</p>
+                    <p>{{ t('eventLocation') }}</p>
+                    <!-- <div class="btn-box">
+                        <el-button class="agenda-download-btn" type="primary" size="large">議程表</el-button>
+                        <el-button class="add-calendar-btn" type="primary" size="large">
+                            <el-icon><ElIconCalendar /></el-icon><span>加入行事曆</span>
+                        </el-button>
+                        
+                    </div> -->
                 </div>
-                <el-button class="right-btn" @click="next"><el-icon>
-                        <ElIconArrowRightBold />
-                    </el-icon></el-button>
+                <div class="conference-registration-box">
+                    <el-form class="registration-form" :model="formData" ref="registrationForm" label-position="top">
+
+                        <div class="warning-text" style="text-align: center;font-size: 1.2rem;">{{ isFormLocked ?
+                            '報名時間已截止，感謝您的熱情參與' : ''
+                        }}</div>
+
+                        <div class="things-to-note">
+                            <h2>{{ t('registrationReminder') }}</h2>
+                            <ul>
+                                <li>{{ t('registrationInfo1') }}</li>
+                                <!-- <li v-if="formData.category === '9'">報名後，可至註冊信箱點擊付款連結，進行付款，請於24小時內完成繳費，超過24小時須重新報名。</li> -->
+                                <li>{{ t('registrationInfo2') }}</li>
+                                <!-- <li v-if="formData.category === '9'">本活動不提供退費</li> -->
+                            </ul>
+                        </div>
+
+                        <span class="warning-text">{{ formData.category === '9' && nurseCount > 400 ? '護理人員人數已達上限' : ''
+                            }}</span>
+
+
+                        <!-- <el-form-item label="報名分類" prop="category" :rules="formRulesTW.category">
+                            <el-radio-group v-model="formData.category">
+                                <el-radio value="8">9/6 醫師手術直播研討會</el-radio>
+                                <el-radio value="9">9/7 護理人員研討會</el-radio>
+                                <el-radio value="10">9/7 護理人員研討會_慈濟體系專區</el-radio>
+                            </el-radio-group>
+                        </el-form-item> -->
+                        <div class="form-section">
+                            <div class="left-section">
+
+                                <el-form-item v-if="formData.category === '8'" prop="country" :label="t('country')"
+                                    :rules="formRulesTW.country">
+                                    <el-select v-model="formData.country" filterable :placeholder="t('selectCountry')">
+                                        <el-option v-for="item in country" :key="item" :label="item"
+                                            :value="item"></el-option>
+                                    </el-select>
+                                </el-form-item>
+
+                                <el-form-item :label="t('chineseName')" prop="chineseName"
+                                    :rules="formRulesTW.chineseName">
+                                    <el-input v-model="formData.chineseName" :placeholder="t('chineseName')"></el-input>
+                                </el-form-item>
+
+                                <el-form-item :label="t('idCard')" prop="idCard" :rules="formRulesTW.idCard">
+                                    <el-input v-model="formData.idCard" :placeholder="t('idCard')"></el-input>
+                                </el-form-item>
+
+                                <el-form-item :label="t('email')" prop="email" :rules="formRulesTW.email">
+                                    <el-input v-model="formData.email" :placeholder="t('email')"></el-input>
+                                </el-form-item>
+
+                                <el-form-item :label="t('confirmEmail')" prop="confirmEmail" :rules="confirmEmailRule">
+                                    <el-input v-model="formData.confirmEmail"
+                                        :placeholder="t('confirmEmail')"></el-input>
+                                </el-form-item>
+                                <el-form-item :label="t('phoneNum')" prop="phone" :rules="formRulesTW.phone">
+                                    <el-input v-model="formData.phone" :placeholder="t('phoneNum')"></el-input>
+                                </el-form-item>
+                            </div>
+
+                            <div class="right-section">
+
+                                <el-form-item v-if="formData.category === '8'" :label="t('hospital')" prop="receipt"
+                                    :rules="formRulesTW.receipt">
+                                    <el-input v-model="formData.receipt" :placeholder="t('hospital')"></el-input>
+                                </el-form-item>
+
+                                <el-form-item :label="t('affiliation')" prop="affiliation"
+                                    :rules="formRulesTW.affiliation">
+                                    <el-input v-model="formData.affiliation" :placeholder="t('affiliation')"></el-input>
+                                </el-form-item>
+
+                                <el-form-item :label="t('jobTitle')" prop="jobTitle" :rules="formRulesTW.jobTitle">
+                                    <el-input v-model="formData.jobTitle" :placeholder="t('jobTitle')"></el-input>
+                                </el-form-item>
+
+
+
+                                <!-- <el-form-item v-if="formData.category !== '8'"
+                                    label="醫院全稱（供每位繳費學員開立收據使用，若未填寫將以學員姓名開立。填寫錯誤恕無法重新開立）" prop="receipt"
+                                    :rules="formRulesTW.receipt">
+                                    <el-input v-model="formData.receipt" placeholder="請輸入醫院全稱"></el-input>
+                                </el-form-item> -->
+
+                                <!-- <el-form-item v-if="formData.category !== '8'" label="是否旁聽9/6醫師研討會 ? (旁聽學員不提供護理學分及午餐)"
+                                    prop="categoryExtra">
+                                    <el-radio-group v-model="formData.categoryExtra">
+                                        <el-radio value="是">是</el-radio>
+                                        <el-radio value="否">否</el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+
+                                <el-form-item v-else label="是否旁聽9/7護理人員研討會？（旁聽學員不提供護理學分，若需學分請改報名9/7護理人員研討會場次）"
+                                    prop="categoryExtra">
+                                    <el-radio-group v-model="formData.categoryExtra">
+                                        <el-radio value="是">是</el-radio>
+                                        <el-radio value="否">否</el-radio>
+                                    </el-radio-group>
+                                </el-form-item> -->
+
+
+                                <el-form-item :label="t('captcha')" prop="verificationCode"
+                                    :rules="formRulesTW.verificationCode">
+                                    <div class="captcha-container">
+                                        <el-input v-model="formData.verificationCode"
+                                            :placeholder="t('captcha')"></el-input>
+                                        <img :src="captcha.image" alt="captcha" @click="getCaptcha">
+                                    </div>
+                                </el-form-item>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="reminder">
+                            <p>{{ t('personalDataNotice') }}</p>
+                            <p>{{ t('personalDataUsage') }}</p>
+                            <p>{{ t('personalDataRights') }}</p>
+                        </div>
+
+                        <el-form-item>
+                            <el-button :disabled="isFormLocked || (formData.category === '9' && nurseCount > 400)"
+                                class="submit-btn" type="primary" @click="handleSubmit(registrationForm)">{{ t('submit')
+                                }}</el-button>
+                        </el-form-item>
+                    </el-form>
+
+                    <!-- <el-button @click="router.push('/registration-success')">test</el-button> -->
+                </div>
+
+                <div style="width: 80%;">
+                    <!-- <img style="width: 100%;" src="/img/agenda.png"> -->
+                </div>
+
             </div>
         </div>
-
     </main>
 </template>
 <script lang="ts" setup>
-import Banner from '@/components/layout/Banner.vue';
-import Breadcrumbs from '@/components/layout/Breadcrumbs.vue';
-import Title from '~/components/layout/Title.vue';
+import type { FormInstance } from 'element-plus';
+import { formRulesTW } from '@/utils/validation-rules';
+import countryJson from '@/assets/data/countries.json';
 
-useSeoMeta({
-    title: 'TICBCS 2026 - Taichung International Breast Comprehensive Breast Cancer Symposium',
-    description: 'TICBCS 2026 is an international symposium dedicated to comprehensive breast cancer research and treatment. Join us in Taichung for cutting-edge insights, expert discussions, and collaborative opportunities in the field of breast cancer.',
-    keywords: 'home, breast cancer, conference, TICBCS2026, TICBCS, ticbcs2026, ticbcs, 台中國際會展中心, 台中國際乳癌研討會, 乳癌研討會, 乳癌, 乳癌教育, 乳癌防治, 中華民國乳癌教育暨防治學會, 中國醫藥大學附設醫院, 中國醫藥大學, 台灣乳房醫學會, 中華民國外科醫學會',
+const { locales, setLocale, t } = useI18n();
+
+const country = ref(countryJson);
+
+const getCaptcha = async () => {
+    let res = await CSRrequest.get('/member/captcha');
+    formData.verificationCode = '';
+    Object.assign(captcha, res.data);
+}
+
+const captcha = reactive({
+    image: '',
+    key: ''
 })
 
-const carousel = ref();
+const vaildConfirmEmail = (rule: any, value: string, callback: any) => {
 
-const prev = () => {
-    carousel.value.prev();
+    if (!value) {
+        callback(new Error("請再次輸入電子信箱"))
+    } else if (value !== formData.email) {
+        callback(new Error("兩次輸入的電子信箱不一致"))
+    } else {
+        callback()
+    }
+}
+
+const confirmEmailRule = [
+    { required: true, message: '請再次輸入電子信箱', trigger: 'blur' },
+    { validator: vaildConfirmEmail, trigger: 'blur' }
+];
+
+
+const registrationForm = ref<FormInstance>();
+
+const formData = reactive({
+    category: '8',
+    chineseName: '',
+    country: '',
+    idCard: '',
+    email: '',
+    confirmEmail: '',
+    phone: '',
+    affiliation: '',
+    jobTitle: '',
+    receipt: '',
+    categoryExtra: '否',
+    verificationCode: '',
+    verificationKey: ''
+})
+// 送出資料後將立即跳轉至付款頁面，如未完成付款資料將於一天後刪除
+const router = useRouter();
+const handleSubmit = (formEl: FormInstance | undefined) => {
+    if (!formEl) return;
+
+    formEl.validate(async (valid) => {
+        if (valid) {
+            // 提交表單邏輯
+            formData.verificationKey = captcha.key; // 將驗證碼key添加到表單數據中
+            if (formData.category === '9') {
+                ElMessageBox.confirm(
+                    '送出申請後，將寄送繳費連結至信箱，請於信箱中的付款連結進行付款，24小時內未付款完成請重新註冊',
+                    '提示',
+                    {
+                        confirmButtonText: '確定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }
+                ).then(async () => {
+                    // 確認後提交表單
+                    let res = await CSRrequest.post('/member', {
+                        body: formData
+                    });
+                    console.log(res)
+                    if (res.code === 200) {
+                        console.log('提交結果', res);
+                        ElMessage.success('報名成功'); formEl.resetFields(); // 重置表單 
+                        getCaptcha(); // 重新獲取驗證碼
+                        if (res.data) {
+                            console.log('重定向到', res.data);
+                            router.push('/registration-success?category=9');
+                            // router.push(res.data);
+                        }
+                    } else {
+                        ElMessage({
+                            message: `報名失敗 : ${res.msg}`,
+                            type: 'error'
+                        }); getCaptcha(); // 重新獲取驗證碼
+                        console.error('報名失敗', res);
+                    }
+                }).catch(() => {
+                    console.log('取消報名');
+                });
+            } else {
+                let res = await CSRrequest.post(`/member?category=${formData.category}`, {
+                    body: formData
+                });
+                console.log(res);
+                if (res.code === 200) {
+                    console.log('提交結果', res);
+                    ElMessage.success('報名成功'); formEl.resetFields(); // 重置表單
+                    getCaptcha(); // 重新獲取驗證碼
+
+                    // if (res.data) {
+                    // console.log('重定向到', res.data);
+                    // router.push(res.data);
+                    router.push('/registration-success');
+                    // }
+                } else {
+                    ElMessage({
+                        message: `報名失敗 : ${res.msg}`,
+                        type: 'error'
+                    });
+                    getCaptcha(); // 重新獲取驗證碼
+                    console.error('報名失敗', res);
+                }
+            }
+        } else {
+            console.error('表單驗證失敗');
+            ElMessage.error('請檢查表單輸入是否正確');
+            getCaptcha(); // 表單驗證失敗時重新獲取驗證碼
+        }
+    });
 };
-const next = () => {
-    carousel.value.next();
+
+
+const nurseCount = ref(0);
+const fetchNurseCount = async () => {
+    let res: any = await CSRrequest.get('/member/nurse-count');
+    if (res.code === 200) {
+        nurseCount.value = Number(res.data);
+    } else {
+        console.error('獲取護理人員數量失敗', res);
+    }
 };
+
+const isFormLocked = ref(false);
+
+//判斷截止時間
+function checkDeadline() {
+    const deadline = new Date('2026-08-07T23:59:59'); // 設定截止時間
+    // const deadline = new Date('2025-08-13T10:27:30'); // 設定截止時間
+    const now = new Date();
+    isFormLocked.value = now > deadline;
+}
+
+
+onMounted(() => {
+    getCaptcha();
+    fetchNurseCount();
+
+    // 判斷截止時間
+    checkDeadline(); // 頁面載入時檢查一次
+    setInterval(checkDeadline, 1000 * 60); // 每分鐘檢查一次
+});
+
 
 
 </script>
@@ -79,141 +329,194 @@ const next = () => {
     font-family: $common-section-font-family;
     min-height: 60vw;
 
-    .main-section {
-        width: 60%;
-        margin-inline: auto;
-
-        @media screen and (max-width: 1024px) {
-            width: 80%;
-        }
-    }
-
     .content {
-
         display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        padding: 0 2.5rem;
 
         @media screen and (max-width: 768px) {
             flex-direction: column;
+            align-items: center;
+            padding: 0;
         }
 
-        .content-image-box {
-            flex: 1;
+        .conference-info-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
 
-            img {
-                width: 80%;
 
-                @media screen and (max-width: 1024px) {
-                    width: 100%;
+            .topic {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+            .btn-box {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 20px;
+
+                .el-button {
+                    border-radius: 20px;
+                    border: none;
+                }
+
+                .agenda-download-btn {
+                    background-color: #971B6A;
+                    color: white;
+                }
+
+                .add-calendar-btn {
+                    background-color: #CA7D8F;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+
+                @media screen and (max-width: 768px) {
+                    flex-direction: column;
+                    align-items: center;
+
+                    .free {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
                 }
             }
         }
 
-        .content-message-box {
-            flex: 1;
-            font-size: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 3rem;
-            color: $main-text-color;
+        .conference-registration-box {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-            // @media screen and (max-width: 1920px) {
-            //     font-size: 1.2rem;
-            //     gap: 3rem;
 
-            // }
-
-            @media screen and (max-width: 1920px) {
-                font-size: 1.5rem;
+            .free {
+                color: red;
             }
 
-            @media screen and (max-width: 1440px) {
+            .registration-form {
+                width: 90%;
+                margin: 0 auto;
+                // font-size: 1rem;
+
+                :deep(.el-form-item__label) {
+                    font-size: 1rem;
+                    color: #333;
+                }
+
+                :deep(.el-input__inner) {
+                    font-size: 1rem;
+                    color: #333;
+                }
+
+                :deep(.el-radio__label) {
+                    font-size: 1rem;
+                    color: #333;
+                }
+
+                :deep(.el-select__inner) {
+                    font-size: 1rem;
+                    color: #333;
+                }
+
+                .things-to-note {
+                    margin: 5% 0;
+
+                    h2 {
+                        font-size: 1.5rem;
+                    }
+
+                    ul {
+                        font-size: 1rem;
+                    }
+                }
+
+                .form-section {
+                    display: flex;
+                    gap: 2rem;
+
+                    @media screen and (max-width: 768px) {
+                        flex-direction: column;
+                        gap: 1rem;
+
+                    }
+
+                    .left-section,
+                    .right-section {
+                        flex: 1;
+
+                    }
+                }
+            }
+
+            .reminder {
                 font-size: 1rem;
-                gap: 2rem;
+                color: #666;
+                margin-top: 20px;
+                line-height: 1.5;
+
+                p {
+                    margin-bottom: 10px;
+                }
             }
 
-
-            @media screen and (max-width: 768px) {
-                font-size: 1.5rem;
+            .captcha-container {
+                display: flex;
+                width: 100%;
                 gap: 1rem;
 
-            }
-        }
+                @media screen and (max-width: 768px) {
+                    flex-direction: column;
+                    align-items: center;
 
-    }
+                }
 
-    .news-section {
-        min-height: 15rem;
-        background-color: #D9D5E4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2.5rem;
-        color: #424384;
-    }
+                el-input {
+                    width: 60%;
 
-    .carousel-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        margin: 5rem;
+                    @media screen and (max-width: 768px) {
+                        width: 100%;
+                    }
+                }
 
+                img {
+                    cursor: pointer;
+                    // width: 30%;
 
-        .left-btn {
-            position: absolute;
-            top: 45%;
-            left: 10%;
-        }
-
-        .right-btn {
-            position: absolute;
-            top: 45%;
-            right: 10%;
-        }
-
-        .el-button {
-            // border: #424384 1px solid;
-            box-shadow: none;
-            border: none;
-            font-size: 1.5rem;
-            color: #D27DA6;
-
-            &:hover {
-                transform: scale(1.2);
-                transition: all 0.3s ease-in-out;
+                    @media screen and (max-width: 768px) {
+                        // width: 60%;
+                    }
+                }
             }
 
-            @media screen and (max-width: 768px) {
-                display: none;
-            }
-        }
-    }
-
-    .carousel-box {
-        width: 100%;
-        // height: 20rem;
-        margin-inline: auto;
-
-        @media screen and (max-width: 768px) {
-            width: 100%;
-
-        }
-
-
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-
-            @media screen and (max-width: 768px) {
+            .submit-btn {
                 width: 100%;
-                height: 13rem;
+                margin-top: 20px;
+                background-color: #E87B86;
+            }
 
+            .warning-text {
+                color: red;
+                font-size: 0.9rem;
+                margin-top: 10px;
             }
         }
 
     }
+
 }
 </style>
