@@ -17,7 +17,7 @@
 
                         <div class="warning-text" style="text-align: center;font-size: 1.2rem;">{{ isFormLocked ?
                             '報名時間已截止，感謝您的熱情參與' : ''
-                        }}</div>
+                            }}</div>
 
                         <div class="things-to-note">
                             <h2>{{ t('registrationReminder') }}</h2>
@@ -295,7 +295,7 @@ const handleSubmit = (formEl: FormInstance | undefined) => {
             formData.verificationKey = captcha.key; // 將驗證碼key添加到表單數據中
             formData.phone = formData.countryCode + '-' + formData.phoneNum; // 將國碼和電話號碼合併
 
-            let res = await CSRrequest.post(`/member?category=${formData.category}`, {
+            let res = await CSRrequest.post(`/member`, {
                 body: formData
             });
             if (res.code === 200) {
