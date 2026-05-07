@@ -221,7 +221,7 @@ onMounted(() => {
         padding: 0.5rem 0rem;
         border-bottom: 8px solid #915aa1;
         background-color: #19254e;
-
+        gap: 60rem;
 
         @media screen and (max-width: 1920px) {
             height: 4.5rem;
