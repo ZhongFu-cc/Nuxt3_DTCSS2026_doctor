@@ -17,7 +17,7 @@
 
                         <div class="warning-text" style="text-align: center;font-size: 1.2rem;">{{ isFormLocked ?
                             '報名時間已截止，感謝您的熱情參與' : ''
-                            }}</div>
+                        }}</div>
 
                         <div class="things-to-note">
                             <h2>{{ t('registrationReminder') }}</h2>
@@ -63,23 +63,6 @@
                                         :placeholder="t('confirmEmail')"></el-input>
                                 </el-form-item>
 
-                                <el-form-item :label="t('password')" prop="password">
-                                    <el-input v-model="formData.password" :placeholder="t('password')"
-                                        type="password"></el-input>
-                                </el-form-item>
-
-                                <el-form-item :label="t('confirmPassword')" prop="confirmPassword"
-                                    :rules="confirmPasswordRule">
-                                    <el-input v-model="formData.confirmPassword" :placeholder="t('confirmPassword')"
-                                        type="password"></el-input>
-                                </el-form-item>
-
-
-
-
-                            </div>
-
-                            <div class="right-section">
                                 <div class="member-phone required">
                                     <el-form-item class="country-code" :label="t('phoneNum')" prop="countryCode">
                                         <div class="country-code-inner">
@@ -93,6 +76,25 @@
                                         <el-input v-model="formData.phoneNum"></el-input>
                                     </el-form-item>
                                 </div>
+
+
+                                <!-- <el-form-item :label="t('password')" prop="password">
+                                    <el-input v-model="formData.password" :placeholder="t('password')"
+                                        type="password"></el-input>
+                                </el-form-item>
+
+                                <el-form-item :label="t('confirmPassword')" prop="confirmPassword"
+                                    :rules="confirmPasswordRule">
+                                    <el-input v-model="formData.confirmPassword" :placeholder="t('confirmPassword')"
+                                        type="password"></el-input>
+                                </el-form-item>
+ -->
+
+
+
+                            </div>
+
+                            <div class="right-section">
 
                                 <el-form-item :label="t('hospital')" prop="receipt">
                                     <el-input v-model="formData.receipt" :placeholder="t('hospital')"></el-input>
@@ -274,8 +276,8 @@ const formRules = computed<FormRules>(() => ({
     receipt: [{ required: true, message: t('hospitalValidate'), trigger: "change" }],
     country: [{ required: true, message: t('countryValidate'), trigger: "change" }],
     idCard: [{ required: formData.country === 'Taiwan', validator: checkIdCard, trigger: "blur" }],
-    password: [{ required: true, message: t('passwordValidate'), trigger: "blur" }],
-    confirmPassword: confirmPasswordRule,
+    // password: [{ required: true, message: t('passwordValidate'), trigger: "blur" }],
+    // confirmPassword: confirmPasswordRule,
     affiliation: [{ required: true, message: t('affiliationValidate'), trigger: "blur" }],
     jobTitle: [{ required: true, message: t('jobTitleValidate'), trigger: "blur" }],
 }))
