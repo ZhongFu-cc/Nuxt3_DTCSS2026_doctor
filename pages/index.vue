@@ -5,9 +5,9 @@
             <div class="content">
                 <div class="conference-info-box">
 
-                    <h1 class="topic">「Good line Good life」</h1>
+                    <h1 class="topic">Good line Good life - 醫師場</h1>
                     <h1 class="topic">大林慈濟第十四屆血液透析瘻管治療與照護國際研討會</h1>
-                    <p>{{ t('eventDate') }}</p>
+                    <p class="event-date">{{ t('eventDate') }}</p>
                     <p>{{ t('eventTime') }}​</p>
                     <p>{{ t('eventLocation') }}</p>
                 </div>
@@ -381,6 +381,11 @@ onMounted(() => {
                 font-weight: bold;
                 color: #333;
                 margin-bottom: 20px;
+            }
+
+            .event-date {
+                font-size: 1.5rem;
+                color: #666;
             }
 
             .btn-box {
