@@ -272,7 +272,7 @@ const formRules = computed<FormRules>(() => ({
     lastName: [{ required: true, message: t('lastNameValidate'), trigger: "blur" }],
     email: [{ required: true, message: t('emailValidate'), trigger: "blur" }],
     confirmEmail: confirmEmailRule,
-    phone: [{ required: true, message: t('phoneNumValidate'), trigger: "blur" }],
+    countryCode: [{ required: true, message: t('phoneNumValidate'), trigger: "blur" }],
     receipt: [{ required: true, message: t('hospitalValidate'), trigger: "change" }],
     country: [{ required: true, message: t('countryValidate'), trigger: "change" }],
     idCard: [{ required: formData.country === 'Taiwan', validator: checkIdCard, trigger: "blur" }],
