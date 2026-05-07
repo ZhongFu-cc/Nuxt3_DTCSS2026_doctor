@@ -5,9 +5,9 @@
             <div class="content">
                 <div class="conference-info-box">
 
-                    <h1 class="topic">「Good line Good life」</h1>
+                    <h1 class="topic">Good line Good life - 醫師場</h1>
                     <h1 class="topic">大林慈濟第十四屆血液透析瘻管治療與照護國際研討會</h1>
-                    <p>{{ t('eventDate') }}</p>
+                    <p class="event-date">{{ t('eventDate') }}</p>
                     <p>{{ t('eventTime') }}​</p>
                     <p>{{ t('eventLocation') }}</p>
                 </div>
@@ -17,7 +17,7 @@
 
                         <div class="warning-text" style="text-align: center;font-size: 1.2rem;">{{ isFormLocked ?
                             '報名時間已截止，感謝您的熱情參與' : ''
-                        }}</div>
+                            }}</div>
 
                         <div class="things-to-note">
                             <h2>{{ t('registrationReminder') }}</h2>
@@ -255,7 +255,7 @@ const formData = reactive({
     email: '',
     confirmEmail: '',
     phone: '',
-    countryCode: '881',
+    countryCode: '886',
     phoneNum: '',
     affiliation: '',
     jobTitle: '',
@@ -272,7 +272,7 @@ const formRules = computed<FormRules>(() => ({
     lastName: [{ required: true, message: t('lastNameValidate'), trigger: "blur" }],
     email: [{ required: true, message: t('emailValidate'), trigger: "blur" }],
     confirmEmail: confirmEmailRule,
-    phone: [{ required: true, message: t('phoneNumValidate'), trigger: "blur" }],
+    countryCode: [{ required: true, message: t('phoneNumValidate'), trigger: "blur" }],
     receipt: [{ required: true, message: t('hospitalValidate'), trigger: "change" }],
     country: [{ required: true, message: t('countryValidate'), trigger: "change" }],
     idCard: [{ required: formData.country === 'Taiwan', validator: checkIdCard, trigger: "blur" }],
@@ -381,6 +381,11 @@ onMounted(() => {
                 font-weight: bold;
                 color: #333;
                 margin-bottom: 20px;
+            }
+
+            .event-date {
+                font-size: 1.5rem;
+                color: #666;
             }
 
             .btn-box {
