@@ -17,7 +17,7 @@
 
                         <div class="warning-text" style="text-align: center;font-size: 1.2rem;">{{ isFormLocked ?
                             '報名時間已截止，感謝您的熱情參與' : ''
-                            }}</div>
+                        }}</div>
 
                         <div class="things-to-note">
                             <h2>{{ t('registrationReminder') }}</h2>
@@ -261,7 +261,7 @@ const formData = reactive({
     categoryExtra: '否',
     verificationCode: '',
     verificationKey: '',
-    food: '123'
+    food: '素'
 })
 
 const formRules = computed<FormRules>(() => ({
