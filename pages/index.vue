@@ -156,7 +156,6 @@
 import { type FormRules, type FormInstance } from 'element-plus';
 import { formRulesTW, codeMap } from '@/utils/validation-rules';
 import countryJson from '@/assets/data/countries.json';
-import { af } from 'element-plus/es/locale/index.mjs';
 
 const { t } = useI18n();
 const localePath = useLocalePath();
