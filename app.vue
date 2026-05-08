@@ -20,9 +20,8 @@
 
 <script setup lang="ts">
 
-import Header from './components/layout/Header.vue';
 import Menu from '@/components/layout/Menu.vue';
-import Bottom from '@/components/layout/Bottom.vue';
+// import Bottom from '@/components/layout/Bottom/.vue';
 import Footer from '@/components/layout/Footer.vue';
 import MobileMenu from './components/layout/MobileMenu.vue';
 import { ref } from 'vue';
