@@ -2,8 +2,6 @@
   <!-- 最外層新增一個wrapper,是為了搭配content 撐開中間內容為空的路由組件來達成一頁的效果  -->
   <div class="wrapper">
 
-    <!-- 共用的Header -->
-    <!-- <Header @open-menu="openMenu" :isActive="isActive"></Header> -->
     <Menu class="menu-bar" @open-menu="openMenu" :isActive="isActive"></Menu>
     <!-- 先用一個main標籤將之後要顯示的路由組件包起來 -->
     <main class="content" :class="{ 'is-open': isActive }">
@@ -11,7 +9,6 @@
     </main>
 
     <!-- 共用的Footer -->
-    <!-- <Bottom /> -->
     <Footer ref="footerRef"></Footer>
   </div>
 
