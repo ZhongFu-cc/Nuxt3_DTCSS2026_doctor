@@ -144,8 +144,8 @@
 
                 </div>
 
-                <div style="width: 80%;">
-                    <!-- <img style="width: 100%;" src="/img/agenda.png"> -->
+                <div class="agenda-box">
+                    <img v-for="agenda in agendas" :key="agenda.id" :src="`${envMinio}${agenda.path}`" alt="agenda">
                 </div>
 
             </div>
@@ -156,7 +156,6 @@
 import { type FormRules, type FormInstance } from 'element-plus';
 import { formRulesTW, codeMap } from '@/utils/validation-rules';
 import countryJson from '@/assets/data/countries.json';
-import { af } from 'element-plus/es/locale/index.mjs';
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -345,6 +344,25 @@ onMounted(() => {
         lang.value = localStorage.getItem('lang') || 'zh'; // 頁面載入後獲取語言設定
     })
 });
+
+const envMinio = useRuntimeConfig().public.minio
+console.log('envMinio', envMinio)
+
+
+const agendas = ref<any[]>([])
+const fetchAgendaFile = async () => {
+    try {
+        const res: any = await CSRrequest.get(`/publish-file/agenda`)
+        agendas.value = res.data
+        console.log('agendas', agendas.value)
+    } catch (error) {
+        console.error('Error fetching agenda file:', error);
+    }
+}
+
+onMounted(() => {
+    fetchAgendaFile()
+})
 
 
 
@@ -606,6 +624,16 @@ onMounted(() => {
                 color: red;
                 font-size: 0.9rem;
                 margin-top: 10px;
+            }
+        }
+
+        .agenda-box {
+            width: 80%;
+            margin: 0 auto;
+
+            img {
+                width: 100%;
+                margin-bottom: 20px;
             }
         }
 
