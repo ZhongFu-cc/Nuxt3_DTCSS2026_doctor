@@ -3,6 +3,11 @@
 
         <div class="main-section">
             <div class="content">
+
+                <div class="conference-banner-box" >
+                    <img src="/img/banner_bg01.png" />
+                </div>
+
                 <div class="conference-info-box">
 
                     <h1 class="topic">Good line Good life - 醫師場</h1>
