@@ -5,8 +5,8 @@
                 <img src="/assets/img/check.png" alt="">
             </div>
             <h1>報名成功！</h1>
-            <p>請至電子信箱確認您的報名資訊。</p>
-            <p>如有任何問題，請聯繫 joanne.wang@zhongfu-pr.com.tw</p>
+            <p class="notice">請至電子信箱確認您的報名資訊。</p>
+            <p class="notice">如有任何問題，請聯繫 joanne.wang@zhongfu-pr.com.tw</p>
             <nuxt-link :to="localePath('/')" class="back-home-link">返回首頁</nuxt-link>
         </el-card>
     </main>
@@ -27,7 +27,7 @@ const category = route.query.category
     align-items: center;
 
     .registration-success-card {
-        width: 32rem;
+        width: 40rem;
         padding: 20px;
         text-align: center;
         background-color: #f9f9f9;
@@ -59,6 +59,10 @@ const category = route.query.category
             &:hover {
                 text-decoration: underline;
             }
+        }
+
+        .notice {
+            font-size: 1.8rem
         }
     }
 }
