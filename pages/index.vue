@@ -16,7 +16,7 @@
 
                         <div class="warning-text" style="text-align: center;font-size: 1.2rem;">{{ isFormLocked ?
                             '報名時間已截止，感謝您的熱情參與' : ''
-                            }}</div>
+                        }}</div>
 
                         <div class="things-to-note">
                             <h2>{{ t('registrationReminder') }}</h2>
@@ -265,7 +265,7 @@ const formData = reactive({
 })
 
 const formRules = computed<FormRules>(() => ({
-    chineseName: [{ required: formData.country === 'Taiwan', message: t('chineseNameValidate'), trigger: "blur" }],
+    chineseName: [{ required: true, message: t('chineseNameValidate'), trigger: "blur" }],
     firstName: [{ required: true, message: t('firstNameValidate'), trigger: "blur" }],
     lastName: [{ required: true, message: t('lastNameValidate'), trigger: "blur" }],
     email: [{ required: true, message: t('emailValidate'), trigger: "blur" }],
