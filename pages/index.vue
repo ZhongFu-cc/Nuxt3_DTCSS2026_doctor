@@ -16,7 +16,7 @@
 
                         <div class="warning-text" style="text-align: center;font-size: 1.2rem;">{{ isFormLocked ?
                             '報名時間已截止，感謝您的熱情參與' : ''
-                        }}</div>
+                            }}</div>
 
                         <div class="things-to-note">
                             <h2>{{ t('registrationReminder') }}</h2>
@@ -43,7 +43,7 @@
                                     <el-input v-model="formData.chineseName" :placeholder="t('chineseName')"></el-input>
                                 </el-form-item>
 
-                                <div class="english-name">
+                                <!-- <div class="english-name">
                                     <el-form-item :label="t('firstName')" prop="firstName">
                                         <el-input v-model="formData.firstName" :placeholder="t('firstName')"></el-input>
                                     </el-form-item>
@@ -51,7 +51,7 @@
                                     <el-form-item :label="t('lastName')" prop="lastName">
                                         <el-input v-model="formData.lastName" :placeholder="t('lastName')"></el-input>
                                     </el-form-item>
-                                </div>
+                                </div> -->
 
                                 <el-form-item :label="t('email')" prop="email">
                                     <el-input v-model="formData.email" :placeholder="t('email')"></el-input>
